@@ -5,6 +5,12 @@ use App\Models\Doctor;
 
 class DoctorsController extends Controller {
 	public function index() {
-		return response()->json(Doctor::all());
+		$doctors = Doctor::all();
+		return response()->json($doctors);
+	}
+
+	public function show($id) {
+		$doctor = Doctor::find($id);
+		return response()->json($doctor);
 	}
 }

@@ -15,8 +15,8 @@ class CreateReportsTable extends Migration {
 			$table->bigIncrements('id');
 			$table->string('recipe');
 			$table->string('observations')->nullable();
-			$table->unsignedBigInteger('patient_id');
-			$table->foreign('patient_id')->references('id')->on('patients');
+			$table->unsignedBigInteger('date_id');
+			$table->foreign('date_id')->references('id')->on('dates');
 			$table->timestamps();
 		});
 	}

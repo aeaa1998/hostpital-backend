@@ -14,7 +14,8 @@ class CreateMedsTable extends Migration {
 		Schema::create('meds', function (Blueprint $table) {
 			$table->bigIncrements('id');
 			$table->string('name')->unique();
-			$table->double('amount', 8, 2);
+			$table->double('price', 8, 2);
+			$table->integer('amount');
 			$table->timestamps();
 		});
 	}

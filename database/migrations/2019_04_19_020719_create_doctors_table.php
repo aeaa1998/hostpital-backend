@@ -13,12 +13,14 @@ class CreateDoctorsTable extends Migration {
 	public function up() {
 		Schema::create('doctors', function (Blueprint $table) {
 			$table->bigIncrements('id');
-			$table->unsignedBigInteger('user_id');
-			$table->foreign('user_id')->references('id')->on('doctor_users');
-			$table->unsignedBigInteger('doctor_type_id');
-			$table->foreign('doctor_type_id')->references('id')->on('doctor_types');
 			$table->string('name');
 			$table->string('last_name');
+			$table->unsignedBigInteger('user_id');
+			$table->foreign('user_id')->references('id')->on('users');
+			$table->unsignedBigInteger('doctor_type_id');
+			$table->foreign('doctor_type_id')->references('id')->on('doctor_types');
+			$table->double('latitud', 11, 2);
+			$table->double('longitud', 11, 2);
 			$table->timestamps();
 		});
 	}

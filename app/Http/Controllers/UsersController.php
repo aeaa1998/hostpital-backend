@@ -37,7 +37,7 @@ class UsersController extends Controller {
 		$validator = Validator::make($request->all(), [
 			'username' => 'bail|required|string',
 			'password' => 'bail|required|string',
-			'name' => 'bail|required|string',
+			'first_name' => 'bail|required|string',
 			'last_name' => 'bail|required|string',
 			'is_doctor' => 'bail|required|integer',
 		]);
@@ -50,14 +50,14 @@ class UsersController extends Controller {
 		$user->save();
 		if ($request->is_doctor == 1) {
 			$doctor = new Doctor;
-			$doctor->name = $request->name;
+			$doctor->first_name = $request->first_name;
 			$doctor->last_name = $request->last_name;
 			$doctor->user_id = $user->id;
 			$doctor->doctor_type_id = $request->doctor_type_id;
 			$doctor->save();
 		}
 		$patient = new Patient;
-		$patient->name = $request->name;
+		$patient->first_name = $request->first_name;
 		$patient->last_name = $request->last_name;
 		$patient->user_id = $user->id;
 		$patient->save();

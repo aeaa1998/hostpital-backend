@@ -10,9 +10,9 @@ class MedsSeeder extends Seeder {
 	 */
 	public function run() {
 		DB::statement('SET FOREIGN_KEY_CHECKS=0');
-		DB::table('schedules')->truncate();
+		DB::table('meds')->truncate();
 
-		DB::table('schedules')->insert([
+		DB::table('meds')->insert([
 			['id' => 1, 'name' => 'Paracetamol', 'amount' => 10, 'price' => 12.00, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 2, 'name' => 'Diclofenaco', 'amount' => 10, 'price' => 122.00, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 3, 'name' => 'Aspirina Bayer', 'amount' => 10, 'price' => 212.00, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],

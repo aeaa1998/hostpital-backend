@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Schedule extends Model {
 	protected $guarded = ['id'];
-	public function doctors(){
-		return $this->belongsToMany('App\Models\Doctor', 'doctor_schedules')
+	public function doctors() {
+		return $this->hasMany('App\Models\Doctor');
 	}
 
 }

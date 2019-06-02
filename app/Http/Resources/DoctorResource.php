@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\DatesResource;
+use App\Http\Resources\DateResource;
 use App\Http\Resources\DoctorTypeResource;
 use App\Http\Resources\ScheduleResource;
 use App\Http\Resources\SinglePatientResource;
@@ -18,10 +18,12 @@ class DoctorResource extends JsonResource {
 	public function toArray($request) {
 		return [
 			"id" => $this->id,
+			'first_name' => $this->first_name,
+			'last_name' => $this->last_name,
 			"doctor_type" => new DoctorTypeResource($this->doctorType),
-			"dates" => DatesResource::collection($this->dates),
+			"dates" => DateResource::collection($this->dates),
 			"patients" => SinglePatientResource::collection($this->patients),
-			"schedules" => ScheduleResource::collection($this->schedules),
+			"schedule" => new ScheduleResource($this->schedule),
 		];
 	}
 }

@@ -19,8 +19,8 @@ class CreateDoctorsTable extends Migration {
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->unsignedBigInteger('doctor_type_id');
 			$table->foreign('doctor_type_id')->references('id')->on('doctor_types');
-			$table->double('latitud', 11, 2);
-			$table->double('longitud', 11, 2);
+			$table->double('latitud', 14, 7)->nullable();
+			$table->double('longitud', 14, 7)->nullable();
 			$table->timestamps();
 		});
 	}

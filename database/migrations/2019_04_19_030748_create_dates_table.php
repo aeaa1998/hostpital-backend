@@ -15,7 +15,7 @@ class CreateDatesTable extends Migration {
 			$table->bigIncrements('id');
 			$table->string('reason');
 			$table->datetime('date');
-			$table->boolean('status');
+			$table->integer('status');
 			$table->unsignedBigInteger('doctor_id');
 			$table->foreign('doctor_id')->references('id')->on('doctors');
 			$table->unsignedBigInteger('patient_id');

@@ -16,8 +16,8 @@ class Date extends Model {
 	public function requests() {
 		return $this->hasMany('App\Models\Date');
 	}
-	public function report(){
-		return $this->hasOne('App\Models\Report')
+	public function report() {
+		return $this->hasOne('App\Models\Report');
 	}
 
 }

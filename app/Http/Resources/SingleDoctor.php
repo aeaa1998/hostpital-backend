@@ -14,10 +14,10 @@ class SingleDoctor extends JsonResource {
 	public function toArray($request) {
 		return [
 			"id" => $this->id,
-			"name" => $this->name,
+			"first_name" => $this->first_name,
 			"last_name" => $this->last_name,
 			"doctor_type" => new DoctorTypeResource($this->doctorType),
-			"schedules" => ScheduleResource::collection($this->schedules),
+			"schedule" => new ScheduleResource($this->schedule),
 		];
 	}
 }

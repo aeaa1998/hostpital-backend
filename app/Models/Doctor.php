@@ -16,11 +16,14 @@ class Doctor extends Model {
 	public function patients() {
 		return $this->belongsToMany('App\Models\DoctorType', 'doctor_patients');
 	}
-	public function schedules() {
-		return $this->belongsToMany('App\Models\Schedule', 'doctor_schedules');
+	public function schedule() {
+		return $this->belongsTo('App\Models\Schedule');
 	}
 	public function dates() {
 		return $this->hasMany('App\Models\Date');
+	}
+	public function datesAccepted() {
+		return $this->dates()->where('status', 1);
 	}
 
 	public function validDateTimeDates($day) {

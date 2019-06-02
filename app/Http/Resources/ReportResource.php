@@ -13,6 +13,7 @@ class ReportResource extends JsonResource {
 	 */
 	public function toArray($request) {
 		return [
+			"id" => $this->id,
 			"recipe" => $this->recipe,
 			"observations" => $this->observations,
 		];

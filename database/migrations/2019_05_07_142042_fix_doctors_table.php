@@ -15,8 +15,8 @@ class FixDoctorsTable extends Migration {
 			$table->renameColumn('name', 'first_name');
 			$table->renameColumn('latitud', 'latitude');
 			$table->renameColumn('longitud', 'longitude');
-			$table->double('latitude')->nullable()->change();
-			$table->double('longitude')->nullable()->change();
+			$table->unsignedBigInteger('schedule_id');
+			$table->foreign('schedule_id')->references('id')->on('schedules');
 		});
 
 	}
@@ -31,8 +31,7 @@ class FixDoctorsTable extends Migration {
 			$table->renameColumn('first_name', 'name');
 			$table->renameColumn('latitude', 'latitud');
 			$table->renameColumn('longitude', 'longitud');
-			$table->double('latitud')->change();
-			$table->double('longitud')->change();
+
 		});
 	}
 }

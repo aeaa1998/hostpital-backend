@@ -18,9 +18,8 @@ class PatientResource extends JsonResource {
 			"id" => $this->id,
 			"name" => $this->name,
 			"last_name" => $this->last_name,
-			"dates" => DatesResource::collection($this->dates),
-			"doctors" => SingleDoctor::collection($this->doctors),
 			"dates" => DateResource::collection($this->dates),
+			"doctors" => SingleDoctor::collection($this->doctors),
 		];
 	}
 }

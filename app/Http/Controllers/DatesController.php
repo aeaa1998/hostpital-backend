@@ -33,6 +33,25 @@ class DatesController extends Controller {
 		return response()->json(DateResource::collection($dates));
 	}
 
+	public function allProcesedDates($user_id, $is_doctor) {
+		if ($is_doctor == 1) {
+			$doctor = Doctor::where('user_id', $user_id)->with('dates')->first();
+			$dates = $doctor->datesProcessed;
+			Session::put('is_doctor', 1);
+		} else {
+			$patient = Patient::where('user_id', $user_id)->with('dates')->first();
+			$dates = $patient->datesProcessed;
+		}
+		return response()->json(DateResource::collection($dates));
+	}
+	public function datesPending($user_id, $is_doctor) {
+		$doctor = Doctor::where('user_id', $user_id)->with('dates')->first();
+		$dates = $doctor->datesPending;
+		Session::put('is_doctor', 1);
+
+		return response()->json(DateResource::collection($dates));
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -172,7 +191,10 @@ class DatesController extends Controller {
 		$date->save();
 		return response()->json(new DateResource($date));
 	}
-
+//0 pendiente
+	//1 aceptada
+	//2 rechazada
+	//3hecha
 	/**
 	 * Remove the specified resource from storage.
 	 *

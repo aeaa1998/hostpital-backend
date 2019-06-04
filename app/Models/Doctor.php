@@ -14,7 +14,7 @@ class Doctor extends Model {
 		return $this->belongsTo('App\Models\DoctorType');
 	}
 	public function patients() {
-		return $this->belongsToMany('App\Models\DoctorType', 'doctor_patients');
+		return $this->belongsToMany('App\Models\Patient', 'doctor_patients');
 	}
 	public function schedule() {
 		return $this->belongsTo('App\Models\Schedule');
@@ -25,9 +25,15 @@ class Doctor extends Model {
 	public function datesAccepted() {
 		return $this->dates()->where('status', 1);
 	}
+	public function datesPending() {
+		return $this->dates()->where('status', 0);
+	}
 
 	public function validDateTimeDates($day) {
 		return $this->dates()->where("status", "!=", 2)->whereDay('date', '=', $day->toDateString())->pluck('dates');
+	}
+	public function datesProcessed() {
+		return $this->dates()->where('status', '>=', 2)->with('report');
 	}
 
 }

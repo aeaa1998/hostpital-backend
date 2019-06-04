@@ -24,7 +24,7 @@ class DateResource extends JsonResource {
 			"patient_id" => $this->patient_id,
 			"patient" => $this->when($request->is_doctor == 1, new SinglePatientResource($this->patient)),
 			"doctor" => $this->when(!$request->is_doctor == 1, new SingleDoctor($this->doctor)),
-			"report" => $this->when($this->status == 1, new ReportResource($this->report)),
+			"report" => $this->when($this->status == 3, new ReportResource($this->report)),
 		];
 	}
 }

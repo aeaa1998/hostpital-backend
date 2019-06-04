@@ -19,6 +19,7 @@ class DoctorTypesSeeder extends Seeder {
 			['id' => 3, 'name' => 'Geriatría', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 4, 'name' => 'Hematología y hemoterapia', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 5, 'name' => 'Neurología', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+			['id' => 6, 'name' => 'Neurología Local', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 7, 'name' => 'Infectología', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 8, 'name' => 'Pediatría', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 9, 'name' => 'Psiquiatría', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],

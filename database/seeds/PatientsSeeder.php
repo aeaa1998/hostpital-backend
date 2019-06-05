@@ -19,7 +19,7 @@ class PatientsSeeder extends Seeder {
 			['id' => 3, 'first_name' => 'Augusto Alonso', 'last_name' => "Alonso Ascencio", 'user_id' => 3, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 4, 'first_name' => 'Michael Chan', 'last_name' => "Chan Chan", 'user_id' => 4, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 5, 'first_name' => 'Dr Simi', 'last_name' => "Galeno Batres", 'user_id' => 5, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-			['id' => 6, 'first_name' => 'Dr Dre', 'last_name' => "Mathers Lamar", 'user_id' => 6, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+			['id' => 6, 'first_name' => 'Dr Dre', 'last_name' => "Mathers Lamar", 'user_id' => 6, 'email' => 'cha18562@uvg.edu.gt', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 7, 'first_name' => 'Hsing Li Paciente', 'last_name' => "Chang Ascencio", 'user_id' => 7, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 8, 'first_name' => 'Hsing Huei Paciente', 'last_name' => "Chang Ascencio", 'user_id' => 8, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 9, 'first_name' => 'Augusto Alonso Paciente', 'last_name' => "Alonso Ascencio", 'user_id' => 9, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],

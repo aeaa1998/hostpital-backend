@@ -1,15 +1,11 @@
 @component('mail::message')
 # Hostpital
 
-Recipe:
-*{{$recipe}}
-Observations:
-*{{$observations}}
+Receta:<br>
+*{{$recipe}}<br>
+Observaciones:<br>
+*{{$observations}}<br>
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
-
-Thanks,<br>
-{{ config('app.name') }}
+Gracias,<br>
+Hostpital
 @endcomponent

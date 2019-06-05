@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\DateResource;
+use App\Mail\ReportMailable;
 use App\Models\Date;
 use App\Models\Doctor;
+use App\Models\Patient;
 use App\Models\Report;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Validator;
 
 class DatesController extends Controller {
 	/**
@@ -61,32 +65,8 @@ class DatesController extends Controller {
 		//
 	}
 
-	public function checkIsAvailable($request, $doctor_id, $patient_id, $date) {
-		$date = Carbon::parse($date);
-		function createCarbon($date) {
-			return Carbon::parse($date);
-		}
-		$doctorSchedule = $doctor->schedules->first();
-		$enterTime = Carbon::parse($doctorSchedule->enter_time);
-		$exitTime = Carbon::parse($doctorSchedule->exit_time);
-		if ($date->hour >= $enterTime->hour && $date->hour <= $exit_time->hour) {
-			$doctor = Doctor::find($doctor_id);
-			$doctorDates = array_map("createCarbon", $doctor->validDateTimeDates($date->day));
-			$patientDates = array_map("createCarbon", $doctor->validDateTimeDates($date->day));
-			$doctorDates = collect($doctorDates);
-			$patientDates = collect($patientDates);
-			$doctorDates->filter(function ($doctorDate) use ($date) {
-				return $doctorDate->equalTo($date);
-			});
-			$patientDates->filter(function ($patientDate) use ($date) {
-				return $patientDate->equalTo($date);
-			});
-			$val = ($patientDates->isEmpty() && $doctorDates->isEmpty());
+	public function checkIsAvailable($doctor_id, $patient_id, $day) {
 
-		} else {
-			$val = false;
-		}
-		return response()->$val;
 	}
 
 	// $availableSchedules = $doctor->schedules->filter(function($schedule, $key) use ($doctorDates, $patientDates){
@@ -124,34 +104,34 @@ class DatesController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
-		standardValidationDates($request);
-		$session = $request->session();
-		$date = new Date();
-		if ($session->has('is_doctor')) {
-			$date->doctor_id = $session->get('doctor_id');
-			$date->patient_id = $request->patient_id;
-			$date->status = 1;
-		} else {
-			$date->patient_id = $session->get('patient_id');
-			$date->doctor_id = $request->doctor_id;
-			$date->status = 0;
-		}
-		$date->date = $request->date;
-		$date->reason = $request->reason;
-		$date->save();
-		return response()->json(new DateResource($date));
-	}
-
-	public function standardValidationDates(Request $request) {
 		$validator = Validator::make($request->all(), [
 			'patient_id' => 'bail|sometimes|required|integer',
 			'doctor_id' => 'bail|sometimes|required|integer',
 			'date' => 'bail|required',
+			'is_doctor' => 'bail|required|int',
 			'reason' => 'bail|required|string',
 		]);
 		if ($validator->fails()) {
 			return response()->json($validator->errors(), 400);
 		}
+		$dateC = Date::where('doctor_id', $request->doctor_id)
+			->where('patient_id', $request->patient_id)
+			->where('status', '<', 2)
+			->whereDate('date', Carbon::parse($request->date))
+			->whereTime('date', Carbon::parse($request->date))
+			->get();
+
+		if (!$dateC->isEmpty()) {
+			return response(["message" => "Esa fecha ya tiene cita o para el doctor"], 500);
+		}
+		$date = new Date();
+		$date->patient_id = $request->patient_id;
+		$date->doctor_id = $request->doctor_id;
+		$date->status = ($request->is_doctor == 1) ? 1 : 0;
+		$date->date = $request->date;
+		$date->reason = $request->reason;
+		$date->save();
+		return response()->json(new DateResource($date));
 	}
 
 	/**
@@ -186,6 +166,9 @@ class DatesController extends Controller {
 			Report::insert([
 				['recipe' => $request->recipe, 'observations' => $request->observations, 'date_id' => $id],
 			]);
+			$patient = Patient::where('id', $date->patient_id)->first();
+			Mail::to([$patient->email])->send(new ReportMailable($request->recipe, $request->observations));
+
 		}
 		$date->status = $request->status;
 		$date->save();

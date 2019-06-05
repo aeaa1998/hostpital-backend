@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\DoctorResource;
+use App\Http\Resources\PatientResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TokenResource extends JsonResource {
@@ -20,6 +22,8 @@ class TokenResource extends JsonResource {
 			"last_name" => $this->patient->last_name,
 			"access_token" => $this->access_token,
 			"is_doctor" => $this->when(session()->has('is_doctor'), 1),
+			"doctor" => $this->when(session()->has('is_doctor'), new DoctorResource($this->doctor)),
+			"patient" => new PatientResource($this->patient),
 		];
 	}
 }

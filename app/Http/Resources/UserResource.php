@@ -18,7 +18,7 @@ class UserResource extends JsonResource {
 			'id' => $this->id,
 			'last_name' => $this->patient->last_name,
 			'first_name' => $this->patient->name,
-			'doctor' => new DoctorResource($this->doctor),
+			'doctor' => $this->when($request->is_doctor == 1, new DoctorResource($this->doctor)),
 			'patient' => new PatientResource($this->patient),
 		];
 	}

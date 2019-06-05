@@ -23,7 +23,7 @@ class PatientsSeeder extends Seeder {
 			['id' => 7, 'first_name' => 'Hsing Li Paciente', 'last_name' => "Chang Ascencio", 'user_id' => 7, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 8, 'first_name' => 'Hsing Huei Paciente', 'last_name' => "Chang Ascencio", 'user_id' => 8, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 			['id' => 9, 'first_name' => 'Augusto Alonso Paciente', 'last_name' => "Alonso Ascencio", 'user_id' => 9, 'email' => 'augustoalonso98@gmail.com', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-			['id' => 10, 'first_name' => 'Michael Chan Paciente', 'last_name' => "Chan Chan", 'user_id' => 10, 'email' => 'hsingli@schoolbuzz.com.gt', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+			['id' => 10, 'first_name' => 'Paciente', 'last_name' => "Chan Chan", 'user_id' => 10, 'email' => 'hsingli@schoolbuzz.com.gt', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
 
 		]);
 	}

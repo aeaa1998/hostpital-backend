@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class ReportMailable extends Mailable {
+	use Queueable, SerializesModels;
+	public $recipe;
+	public $observations;
+	/**
+	 * Create a new message instance.
+	 *
+	 * @return void
+	 */
+	public function __construct($recipe, $observations) {
+		$this->recipe = $recipe;
+		$this->observations = $observations;
+	}
+
+	/**
+	 * Build the message.
+	 *
+	 * @return $this
+	 */
+	public function build() {
+		return $this->markdown('emails.users.reports')->withObservations($this->observations)->withRecipe($this->recipe);
+	}
+}

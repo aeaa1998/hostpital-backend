@@ -16,11 +16,9 @@ class AccessTokenController extends ATC {
 		try {
 			//get username (default is :email)
 			$username = $request->getParsedBody()['username'];
-
 			//get user
 			//change to 'email' if you want
 			$user = User::where('email', $username)->with(['doctor', 'patient'])->first();
-
 			//generate token
 			$tokenResponse = parent::issueToken($request);
 
@@ -51,7 +49,6 @@ class AccessTokenController extends ATC {
 			return response(["message" => "The user credentials were incorrect.', 6, 'invalid_credentials"], 500);
 		} catch (Exception $e) {
 			////return error message
-			dd($e);
 			return response(["message" => "Internal server error"], 500);
 		}
 	}
